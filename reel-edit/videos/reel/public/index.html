@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: "Inter";
+        src: url("fonts/Inter-400-latin.woff2") format("woff2");
+        font-weight: 400;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("fonts/Inter-700-latin.woff2") format("woff2");
+        font-weight: 700;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("fonts/Caveat-400-latin.woff2") format("woff2");
+        font-weight: 400;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("fonts/Caveat-700-latin.woff2") format("woff2");
+        font-weight: 700;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Virgil";
+        src: url("fonts/Virgil.woff2") format("woff2");
+        font-display: block;
+      }
+      @font-face {
+        font-family: "LXGW WenKai TC";
+        src: url("fonts/LXGWWenKaiTC-400-latin.woff2") format("woff2");
+        font-weight: 400;
+        font-display: block;
+      }
+
+      :root {
+        --bg: #1a1a1a;
+        --text: #f1f1f1;
+        --accent-0: #4cc9f0;
+        --accent-1: #f72585;
+        --accent-2: #4ade80;
+        --accent-3: #fb923c;
+        --accent-4: #a78bfa;
+        --font-family: "Inter", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; padding: 0;
+        width: 100%; height: 100%;
+        overflow: hidden;
+        background: #000;
+        font-family: "Inter", "Caveat", "LXGW WenKai TC", ui-sans-serif, system-ui, sans-serif;
+      }
+      #stage {
+        position: relative;
+        width: 100%; height: 100%;
+        overflow: hidden;
+      }
+      .video-wrapper {
+        position: absolute;
+        left: 0; top: 0;
+        width: 1080px; height: 1920px;
+        overflow: hidden;
+      }
+      .video-wrapper video {
+        width: 100%; height: 100%;
+        object-fit: cover;
+      }
+      .card-host {
+        position: absolute;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .card-host .card {
+        position: relative;
+        width: 100%; height: 100%;
+        overflow: hidden;
+      }
+      .card-host .char {
+        display: inline-block;
+        visibility: visible;
+      }
+
+      .vignette {
+        position: absolute;
+        left: 0; top: 0;
+        width: 1080px; height: 1920px;
+        pointer-events: none;
+        background: linear-gradient(
+          to top,
+          rgba(0,0,0,0.85) 0%,
+          rgba(0,0,0,0.4) 25%,
+          rgba(0,0,0,0.0) 50%,
+          rgba(0,0,0,0.0) 100%
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="stage"
+      data-composition-id="talking-head-recut"
+      data-start="0"
+      data-duration="37.07"
+      data-fps="30"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- Layer 1: source video full-bleed -->
+      <div class="video-wrapper" id="video-wrap">
+        <video
+          id="bg-video"
+          src="input-video.mp4"
+          muted
+          playsinline
+          data-start="0"
+          data-duration="37.07"
+          data-track-index="1"
+        ></video>
+      </div>
+
+      <!-- Audio track -->
+      <audio
+        id="source-audio"
+        src="input-video.mp4"
+        data-start="0"
+        data-duration="37.07"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <!-- Vignette overlay for text readability -->
+      <div class="vignette" id="vignette" data-track-index="1"></div>
+
+      <!-- Card 01: THE GRIND — 8 interviews in 1 week -->
+      <div
+        class="card-host clip"
+        id="host-card-01"
+        data-card-id="card-01"
+        data-start="0.3000"
+        data-duration="6.2000"
+        data-track-index="2"
+        style="left:0;top:0;width:1080px;height:1920px;visibility:hidden;opacity:0;"
+      >
+        <div class="card" data-card-id="card-01">
+          <style>
+            .card[data-card-id="card-01"] .root {
+              width: 100%; height: 100%;
+              display: flex; flex-direction: column;
+              justify-content: flex-end;
+              padding: 36px 32px 120px;
+              font-family: 'Inter', sans-serif;
+              color: #f1f1f1;
+              background: transparent;
+            }
+            .card[data-card-id="card-01"] .kicker {
+              font-size: 18px; font-weight: 700;
+              letter-spacing: 4px; text-transform: uppercase;
+              color: var(--accent-0); margin-bottom: 12px;
+            }
+            .card[data-card-id="card-01"] .title {
+              font-size: 120px; font-weight: 700;
+              line-height: 1.0; margin-bottom: 8px;
+              text-shadow: 0 4px 30px rgba(0,0,0,0.7);
+            }
+            .card[data-card-id="card-01"] .detail {
+              font-size: 52px; font-weight: 400;
+              opacity: 0.85;
+              text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+            }
+            .card[data-card-id="card-01"] .accent-line {
+              width: 0; height: 4px;
+              background: var(--accent-0);
+              border-radius: 2px; margin-bottom: 16px;
+            }
+          </style>
+          <div class="root">
+            <div id="card-01-kicker" class="kicker">THE GRIND</div>
+            <div id="card-01-line" class="accent-line"></div>
+            <div id="card-01-title" class="title"><span class="char">8</span></div>
+            <div id="card-01-detail" class="detail">INTERVIEWS IN 1 WEEK</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 02: THE RESULT — 1 job offer -->
+      <div
+        class="card-host clip"
+        id="host-card-02"
+        data-card-id="card-02"
+        data-start="6.5000"
+        data-duration="6.5000"
+        data-track-index="2"
+        style="left:0;top:0;width:1080px;height:1920px;visibility:hidden;opacity:0;"
+      >
+        <div class="card" data-card-id="card-02">
+          <style>
+            .card[data-card-id="card-02"] .root {
+              width: 100%; height: 100%;
+              display: flex; flex-direction: column;
+              justify-content: flex-end;
+              padding: 36px 32px 120px;
+              font-family: 'Inter', sans-serif;
+              color: #f1f1f1;
+              background: transparent;
+            }
+            .card[data-card-id="card-02"] .kicker {
+              font-size: 18px; font-weight: 700;
+              letter-spacing: 4px; text-transform: uppercase;
+              color: var(--accent-1); margin-bottom: 12px;
+            }
+            .card[data-card-id="card-02"] .number {
+              font-size: 160px; font-weight: 700;
+              line-height: 1.0; color: var(--accent-1);
+              text-shadow: 0 4px 40px rgba(247,37,133,0.4);
+            }
+            .card[data-card-id="card-02"] .label {
+              font-size: 56px; font-weight: 700;
+              line-height: 1.1;
+              text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+            }
+            .card[data-card-id="card-02"] .accent-line {
+              width: 0; height: 4px;
+              background: var(--accent-1);
+              border-radius: 2px; margin: 16px 0;
+            }
+          </style>
+          <div class="root">
+            <div id="card-02-kicker" class="kicker">THE RESULT</div>
+            <div id="card-02-number" class="number">1</div>
+            <div id="card-02-line" class="accent-line"></div>
+            <div id="card-02-label" class="label">JOB OFFER</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 03: THE STACK — Claude + Apify -->
+      <div
+        class="card-host clip"
+        id="host-card-03"
+        data-card-id="card-03"
+        data-start="13.0000"
+        data-duration="7.0000"
+        data-track-index="2"
+        style="left:0;top:0;width:1080px;height:1920px;visibility:hidden;opacity:0;"
+      >
+        <div class="card" data-card-id="card-03">
+          <style>
+            .card[data-card-id="card-03"] .root {
+              width: 100%; height: 100%;
+              display: flex; flex-direction: column;
+              justify-content: flex-end;
+              padding: 36px 32px 120px;
+              font-family: 'Inter', sans-serif;
+              color: #f1f1f1;
+              background: transparent;
+            }
+            .card[data-card-id="card-03"] .kicker {
+              font-size: 18px; font-weight: 700;
+              letter-spacing: 4px; text-transform: uppercase;
+              color: var(--accent-2); margin-bottom: 12px;
+            }
+            .card[data-card-id="card-03"] .stack-row {
+              display: flex; align-items: center;
+              gap: 20px; margin-bottom: 12px;
+            }
+            .card[data-card-id="card-03"] .tool {
+              font-size: 64px; font-weight: 700;
+              line-height: 1.1;
+              text-shadow: 0 4px 30px rgba(0,0,0,0.7);
+            }
+            .card[data-card-id="card-03"] .plus {
+              font-size: 48px; font-weight: 300;
+              color: var(--accent-2);
+              text-shadow: 0 0 20px rgba(74,222,128,0.5);
+            }
+            .card[data-card-id="card-03"] .detail {
+              font-size: 28px; font-weight: 400;
+              opacity: 0.7; margin-top: 8px;
+            }
+            .card[data-card-id="card-03"] .accent-line {
+              width: 0; height: 4px;
+              background: var(--accent-2);
+              border-radius: 2px; margin-bottom: 16px;
+            }
+          </style>
+          <div class="root">
+            <div id="card-03-kicker" class="kicker">THE STACK</div>
+            <div id="card-03-line" class="accent-line"></div>
+            <div class="stack-row">
+              <div id="card-03-claude" class="tool">CLAUDE</div>
+              <div id="card-03-plus" class="plus">+</div>
+              <div id="card-03-apify" class="tool">APIFY</div>
+            </div>
+            <div id="card-03-detail" class="detail">AI-powered job hunting</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 04: THE FLOW — prompt → scrape → artifact -->
+      <div
+        class="card-host clip"
+        id="host-card-04"
+        data-card-id="card-04"
+        data-start="20.0000"
+        data-duration="8.0000"
+        data-track-index="2"
+        style="left:0;top:0;width:1080px;height:1920px;visibility:hidden;opacity:0;"
+      >
+        <div class="card" data-card-id="card-04">
+          <style>
+            .card[data-card-id="card-04"] .root {
+              width: 100%; height: 100%;
+              display: flex; flex-direction: column;
+              justify-content: flex-end;
+              padding: 36px 32px 120px;
+              font-family: 'Inter', sans-serif;
+              color: #f1f1f1;
+              background: transparent;
+            }
+            .card[data-card-id="card-04"] .kicker {
+              font-size: 18px; font-weight: 700;
+              letter-spacing: 4px; text-transform: uppercase;
+              color: #fff6ef; margin-bottom: 12px;
+            }
+            .card[data-card-id="card-04"] .flow-step {
+              font-size: 44px; font-weight: 700;
+              line-height: 1.3; margin-bottom: 6px;
+              text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+            }
+            .card[data-card-id="card-04"] .arrow {
+              font-size: 36px; color: var(--accent-3);
+              margin: 4px 0;
+              text-shadow: 0 0 15px rgba(251,146,60,0.5);
+            }
+            .card[data-card-id="card-04"] .accent-line {
+              width: 0; height: 4px;
+              background: var(--accent-3);
+              border-radius: 2px; margin-bottom: 16px;
+            }
+          </style>
+          <div class="root">
+            <div id="card-04-kicker" class="kicker">THE FLOW</div>
+            <div id="card-04-line" class="accent-line"></div>
+            <div id="card-04-step1" class="flow-step">WRITE A PROMPT</div>
+            <div id="card-04-arrow1" class="arrow">&#x2193;</div>
+            <div id="card-04-step2" class="flow-step">SCRAPE THE INTERNET</div>
+            <div id="card-04-arrow2" class="arrow">&#x2193;</div>
+            <div id="card-04-step3" class="flow-step">GET THE ARTIFACT</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 05: THE TAKEAWAY — automate the hustle -->
+      <div
+        class="card-host clip"
+        id="host-card-05"
+        data-card-id="card-05"
+        data-start="28.0000"
+        data-duration="8.5000"
+        data-track-index="2"
+        style="left:0;top:0;width:1080px;height:1920px;visibility:hidden;opacity:0;"
+      >
+        <div class="card" data-card-id="card-05">
+          <style>
+            .card[data-card-id="card-05"] .root {
+              width: 100%; height: 100%;
+              display: flex; flex-direction: column;
+              justify-content: flex-end;
+              align-items: center; text-align: center;
+              padding: 36px 32px 120px;
+              font-family: 'Inter', sans-serif;
+              color: #f1f1f1;
+              background: transparent;
+            }
+            .card[data-card-id="card-05"] .kicker {
+              font-size: 18px; font-weight: 700;
+              letter-spacing: 4px; text-transform: uppercase;
+              color: var(--accent-4); margin-bottom: 12px;
+            }
+            .card[data-card-id="card-05"] .title {
+              font-size: 72px; font-weight: 700;
+              line-height: 1.1;
+              text-shadow: 0 4px 30px rgba(0,0,0,0.7);
+              margin-bottom: 12px;
+            }
+            .card[data-card-id="card-05"] .detail {
+              font-size: 28px; font-weight: 400;
+              opacity: 0.7;
+            }
+            .card[data-card-id="card-05"] .accent-line {
+              width: 0; height: 4px;
+              background: var(--accent-4);
+              border-radius: 2px; margin-bottom: 16px;
+            }
+          </style>
+          <div class="root">
+            <div id="card-05-kicker" class="kicker">THE TAKEAWAY</div>
+            <div id="card-05-line" class="accent-line"></div>
+            <div id="card-05-title" class="title"><span class="char">A</span><span class="char">U</span><span class="char">T</span><span class="char">O</span><span class="char">M</span><span class="char">A</span><span class="char">T</span><span class="char">E</span><span class="char"> </span><span class="char">T</span><span class="char">H</span><span class="char">E</span><span class="char"> </span><span class="char">H</span><span class="char">U</span><span class="char">S</span><span class="char">T</span><span class="char">L</span><span class="char">E</span></div>
+            <div id="card-05-detail" class="detail">Let AI do the heavy lifting</div>
+          </div>
+        </div>
+      </div>
+
+      <script src="vendor/gsap.min.js"></script>
+      <script>
+        (function () {
+          window.__fmt = function (v, fmt) {
+            if (typeof fmt === "string" && /^\.[0-9]+f$/.test(fmt))
+              return Number(v).toFixed(Number(fmt.slice(1, -1)));
+            if (fmt === ",d") return Math.round(v).toLocaleString();
+            return String(Math.round(v));
+          };
+
+          var tl = window.gsap.timeline({ paused: true });
+
+          // ── Card 01 [0.3, 6.5] ──
+          tl.set('.card-host[data-card-id="card-01"]', { visibility: "visible" }, 0.3);
+          tl.fromTo('.card-host[data-card-id="card-01"]', { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 0.3);
+          // kicker slide-in
+          tl.fromTo('.card[data-card-id="card-01"] #card-01-kicker', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.5);
+          // accent line
+          tl.fromTo('.card[data-card-id="card-01"] #card-01-line', { width: 0 }, { width: 140, duration: 0.6, ease: "power2.out" }, 0.7);
+          // big "8" pop
+          tl.from('.card[data-card-id="card-01"] #card-01-title .char', { opacity: 0, y: 8, scale: 0.8, duration: 0.5, ease: "back.out(1.6)", stagger: 0.05 }, 0.8);
+          // detail fade
+          tl.fromTo('.card[data-card-id="card-01"] #card-01-detail', { opacity: 0 }, { opacity: 0.85, duration: 0.6, ease: "power2.out" }, 1.3);
+          // exit
+          tl.to('.card-host[data-card-id="card-01"]', { opacity: 0, duration: 0.35, ease: "power2.in" }, 6.15);
+          tl.set('.card-host[data-card-id="card-01"]', { visibility: "hidden" }, 6.5);
+
+          // ── Card 02 [6.5, 13.0] ──
+          tl.set('.card-host[data-card-id="card-02"]', { visibility: "visible" }, 6.5);
+          tl.fromTo('.card-host[data-card-id="card-02"]', { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 6.5);
+          // kicker
+          tl.fromTo('.card[data-card-id="card-02"] #card-02-kicker', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 6.7);
+          // big number pop
+          tl.fromTo('.card[data-card-id="card-02"] #card-02-number', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 6.9);
+          // accent line
+          tl.fromTo('.card[data-card-id="card-02"] #card-02-line', { width: 0 }, { width: 180, duration: 0.5, ease: "power2.out" }, 7.1);
+          // label
+          tl.fromTo('.card[data-card-id="card-02"] #card-02-label', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 7.3);
+          // exit
+          tl.to('.card-host[data-card-id="card-02"]', { opacity: 0, duration: 0.35, ease: "power2.in" }, 12.65);
+          tl.set('.card-host[data-card-id="card-02"]', { visibility: "hidden" }, 13.0);
+
+          // ── Card 03 [13.0, 20.0] ──
+          tl.set('.card-host[data-card-id="card-03"]', { visibility: "visible" }, 13.0);
+          tl.fromTo('.card-host[data-card-id="card-03"]', { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 13.0);
+          // kicker
+          tl.fromTo('.card[data-card-id="card-03"] #card-03-kicker', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 13.2);
+          // accent line
+          tl.fromTo('.card[data-card-id="card-03"] #card-03-line', { width: 0 }, { width: 120, duration: 0.5, ease: "power2.out" }, 13.4);
+          // CLAUDE slide from left
+          tl.fromTo('.card[data-card-id="card-03"] #card-03-claude', { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 13.5);
+          // + pop
+          tl.fromTo('.card[data-card-id="card-03"] #card-03-plus', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 13.9);
+          // APIFY slide from right
+          tl.fromTo('.card[data-card-id="card-03"] #card-03-apify', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 14.0);
+          // detail
+          tl.fromTo('.card[data-card-id="card-03"] #card-03-detail', { opacity: 0 }, { opacity: 0.7, duration: 0.5, ease: "power2.out" }, 14.4);
+          // exit
+          tl.to('.card-host[data-card-id="card-03"]', { opacity: 0, duration: 0.35, ease: "power2.in" }, 19.65);
+          tl.set('.card-host[data-card-id="card-03"]', { visibility: "hidden" }, 20.0);
+
+          // ── Card 04 [20.0, 28.0] ──
+          tl.set('.card-host[data-card-id="card-04"]', { visibility: "visible" }, 20.0);
+          tl.fromTo('.card-host[data-card-id="card-04"]', { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 20.0);
+          // kicker
+          tl.fromTo('.card[data-card-id="card-04"] #card-04-kicker', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 20.2);
+          // accent line
+          tl.fromTo('.card[data-card-id="card-04"] #card-04-line', { width: 0 }, { width: 100, duration: 0.5, ease: "power2.out" }, 20.4);
+          // step 1
+          tl.fromTo('.card[data-card-id="card-04"] #card-04-step1', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 20.6);
+          // arrow 1
+          tl.fromTo('.card[data-card-id="card-04"] #card-04-arrow1', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 21.0);
+          // step 2
+          tl.fromTo('.card[data-card-id="card-04"] #card-04-step2', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 21.2);
+          // arrow 2
+          tl.fromTo('.card[data-card-id="card-04"] #card-04-arrow2', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 21.6);
+          // step 3
+          tl.fromTo('.card[data-card-id="card-04"] #card-04-step3', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 21.8);
+          // exit
+          tl.to('.card-host[data-card-id="card-04"]', { opacity: 0, duration: 0.35, ease: "power2.in" }, 27.65);
+          tl.set('.card-host[data-card-id="card-04"]', { visibility: "hidden" }, 28.0);
+
+          // ── Card 05 [28.0, 36.5] ──
+          tl.set('.card-host[data-card-id="card-05"]', { visibility: "visible" }, 28.0);
+          tl.fromTo('.card-host[data-card-id="card-05"]', { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 28.0);
+          // kicker
+          tl.fromTo('.card[data-card-id="card-05"] #card-05-kicker', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 28.3);
+          // accent line
+          tl.fromTo('.card[data-card-id="card-05"] #card-05-line', { width: 0 }, { width: 200, duration: 0.6, ease: "power2.out" }, 28.5);
+          // kinetic chars
+          tl.from('.card[data-card-id="card-05"] #card-05-title .char', { opacity: 0, y: 8, scale: 0.8, duration: 0.5, ease: "back.out(1.6)", stagger: 0.04 }, 28.7);
+          // detail
+          tl.fromTo('.card[data-card-id="card-05"] #card-05-detail', { opacity: 0 }, { opacity: 0.7, duration: 0.5, ease: "power2.out" }, 29.5);
+          // exit
+          tl.to('.card-host[data-card-id="card-05"]', { opacity: 0, duration: 0.5, ease: "power2.in" }, 36.0);
+          tl.set('.card-host[data-card-id="card-05"]', { visibility: "hidden" }, 36.5);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["talking-head-recut"] = tl;
+        })();
+      </script>
+    </div>
+  </body>
+</html>
