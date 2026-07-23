@@ -1,0 +1,53 @@
+<div class="card" data-card-id="card-01">
+  <style>
+    .card[data-card-id="card-01"] .root {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 36px 32px 120px;
+      font-family: 'Inter', sans-serif;
+      color: #f1f1f1;
+      background: transparent;
+    }
+    .card[data-card-id="card-01"] .kicker {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent-0);
+      margin-bottom: 12px;
+    }
+    .card[data-card-id="card-01"] .title {
+      font-size: 120px;
+      font-weight: 700;
+      line-height: 1.0;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.7);
+    }
+    .card[data-card-id="card-01"] .detail {
+      font-size: 52px;
+      font-weight: 400;
+      opacity: 0.85;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+    .card[data-card-id="card-01"] .accent-line {
+      width: 0; height: 4px;
+      background: var(--accent-0);
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+  </style>
+  <div class="root">
+    <div id="card-01-kicker" class="kicker"
+      data-anim="slide-in" data-anim-at="0.2" data-anim-duration="0.5"
+      data-anim-from="left" data-anim-distance="60">THE GRIND</div>
+    <div id="card-01-line" class="accent-line"
+      data-anim="grow-x" data-anim-at="0.4" data-anim-duration="0.6"
+      data-anim-target-w="140"></div>
+    <div id="card-01-title" class="title"
+      data-anim="kinetic-chars" data-anim-at="0.5" data-anim-duration="0.5"
+      data-anim-stagger="0.05" data-anim-pattern="pop"><span class="char">8</span></div>
+    <div id="card-01-detail" class="detail"
+      data-anim="fade-in" data-anim-at="1.0" data-anim-duration="0.6">INTERVIEWS IN 1 WEEK</div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="card" data-card-id="card-03">
+  <style>
+    .card[data-card-id="card-03"] .root {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 36px 32px 120px;
+      font-family: 'Inter', sans-serif;
+      color: #f1f1f1;
+      background: transparent;
+    }
+    .card[data-card-id="card-03"] .kicker {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 12px;
+    }
+    .card[data-card-id="card-03"] .stack-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 12px;
+    }
+    .card[data-card-id="card-03"] .tool {
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.7);
+    }
+    .card[data-card-id="card-03"] .plus {
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--accent-2);
+      text-shadow: 0 0 20px rgba(74,222,128,0.5);
+    }
+    .card[data-card-id="card-03"] .detail {
+      font-size: 28px;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-top: 8px;
+    }
+    .card[data-card-id="card-03"] .accent-line {
+      width: 0; height: 4px;
+      background: var(--accent-2);
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+  </style>
+  <div class="root">
+    <div id="card-03-kicker" class="kicker"
+      data-anim="slide-in" data-anim-at="0.2" data-anim-duration="0.4"
+      data-anim-from="left" data-anim-distance="60">THE STACK</div>
+    <div id="card-03-line" class="accent-line"
+      data-anim="grow-x" data-anim-at="0.4" data-anim-duration="0.5"
+      data-anim-target-w="120"></div>
+    <div class="stack-row">
+      <div id="card-03-claude" class="tool"
+        data-anim="slide-in" data-anim-at="0.5" data-anim-duration="0.5"
+        data-anim-from="left" data-anim-distance="80">CLAUDE</div>
+      <div id="card-03-plus" class="plus"
+        data-anim="scale-pop" data-anim-at="0.9" data-anim-duration="0.3">+</div>
+      <div id="card-03-apify" class="tool"
+        data-anim="slide-in" data-anim-at="1.0" data-anim-duration="0.5"
+        data-anim-from="right" data-anim-distance="80">APIFY</div>
+    </div>
+    <div id="card-03-detail" class="detail"
+      data-anim="fade-in" data-anim-at="1.4" data-anim-duration="0.5">AI-powered job hunting</div>
+  </div>
+</div>
