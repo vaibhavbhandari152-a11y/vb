@@ -6,7 +6,7 @@ layout, the wreath, the "&", date, venue, music and all three scene animations â
 is the untouched original.
 
 - Source: `source.mp4` (360Ã—640, 21.13s, 30fps, 634 frames)
-- Output: `renders/ayush-and-bharti.mp4`
+- Output: `renders/Ayush-and-Bharti.mp4`
 
 ## Approach
 
