@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=360, height=640" />
+    <title>Wedding Invitation — Shruti &amp; Ayush</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 360px;
+        height: 640px;
+        overflow: hidden;
+        background: #000;
+      }
+
+      /* The exact script face the source card is set in. Self-hosted so the
+         render is deterministic and needs no network. */
+      @font-face {
+        font-family: "Great Vibes";
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+        src: url("assets/GreatVibes-latin.woff2") format("woff2");
+      }
+
+      #root {
+        position: relative;
+        width: 360px;
+        height: 640px;
+        overflow: hidden;
+      }
+
+      /* Covers the groom's name baked into the source footage. The card
+         interior behind it is pure #fff, so a flat patch is seamless. */
+      #name-patch {
+        position: absolute;
+        left: 153px;
+        top: 206px;
+        width: 100px;
+        height: 36px;
+        background: #fff;
+      }
+
+      /* SVG so the baseline is placed exactly (y IS the baseline) rather than
+         inferred from line-box metrics. */
+      #name-svg {
+        position: absolute;
+        inset: 0;
+        width: 360px;
+        height: 640px;
+      }
+      #name-text {
+        font-family: "Great Vibes";
+        font-size: 35px;
+        fill: #2c2c26;
+        text-rendering: geometricPrecision;
+        /* Two jobs. The filter forces its own compositing layer, which drops
+           Chromium's subpixel AA — that put orange/blue fringes on the strokes
+           where the source card's own type is neutral grey. The sub-pixel blur
+           then softens the vector edges to sit with the surrounding artwork,
+           which is soft from the source's own encode. */
+        filter: blur(0.3px);
+      }
+      /* Letters start hidden in CSS so frame 0 is correct without a
+         zero-duration set at timeline position 0. */
+      #name-text .ltr {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="21.1333"
+      data-width="360"
+      data-height="640"
+    >
+      <video
+        id="a-roll"
+        class="clip"
+        src="source.mp4"
+        muted
+        playsinline
+        data-start="0"
+        data-duration="21.1333"
+        data-track-index="0"
+        style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"
+      ></video>
+      <audio
+        id="a-roll-audio"
+        src="source.mp4"
+        data-start="0"
+        data-duration="21.1333"
+        data-track-index="2"
+        data-volume="1"
+      ></audio>
+
+      <!-- Name swap. Enters at 12.9333s: the wreath has finished drawing and
+           the card interior is blank, one beat before the source starts
+           typing the old name at 13.0667s. -->
+      <div
+        id="name-swap"
+        class="clip"
+        data-start="12.9333"
+        data-duration="8.2"
+        data-track-index="1"
+      >
+        <div id="name-patch"></div>
+        <svg id="name-svg" viewBox="0 0 360 640" xmlns="http://www.w3.org/2000/svg">
+          <text id="name-text" x="164" y="235" text-anchor="start"><tspan
+              class="ltr"
+            >A</tspan><tspan class="ltr">y</tspan><tspan class="ltr">u</tspan><tspan
+              class="ltr"
+            >s</tspan><tspan class="ltr">h</tspan></text>
+        </svg>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // The source card types each name on one letter every 2 frames @30fps.
+      // "Vaibhaw" ran frames 392..404; "Ayush" picks up the same cadence from
+      // the same frame so both names in the wreath stay in lockstep.
+      const FIRST_FRAME = 392; // letter 0 lands here
+      const FRAMES_PER_LETTER = 2;
+      const FPS = 30;
+
+      // Each set is placed half a frame early, in the gap before its target
+      // frame. Landing one exactly on a frame time makes it a float-equality
+      // coin toss, which showed up as every letter appearing one frame late.
+      const letters = gsap.utils.toArray("#name-text .ltr");
+      letters.forEach((el, i) => {
+        const frame = FIRST_FRAME + i * FRAMES_PER_LETTER;
+        tl.set(el, { opacity: 1 }, (2 * frame - 1) / (2 * FPS));
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
