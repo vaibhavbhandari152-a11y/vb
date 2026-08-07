@@ -29,6 +29,7 @@ Everything below was measured off the source frames rather than eyeballed.
 | Property | Value | How it was established |
 | --- | --- | --- |
 | Typeface | Great Vibes | Best of 10 script candidates. At 30px it reproduces "Vaibhaw" at 94×29px and at 37px "Shruti" at 84×34px — both the source's exact ink boxes. |
+| Capital A | Allura, subset to U+0041 | Great Vibes draws its capital A as a closed loop with no apex, so at 37px it reads as a lowercase a. Allura's A has a pointed apex at near-identical stroke weight and slant. Only that one glyph is swapped — "yush" and "Bharti" stay Great Vibes and keep matching the card's baked-in date and venue. |
 | Size | 37px, both lines | The template's own maximum (what "Shruti" used). Both new names fit their bands at it, so the pair reads at one scale. |
 | Colour | `#2c2c26` | Calibrated so rendered ink averages RGB ~(89, 89, 84) vs the original's (90.2, 90.2, 84.2). |
 | Baselines | y = 176 and y = 235 | Solved against each original ink box; ±1px both land visibly off. |
@@ -59,6 +60,17 @@ Against the source, frame by frame across all 634 frames:
   stops at y=187 — two rows clear of it, with no horizontal overlap.
 - Audio correlates at 0.997 with the original, offset 21ms (AAC priming delay,
   sub-frame).
+
+With the Allura capital A, measured against a text-free plate so only drawn ink
+counts:
+
+- "Ayush" occupies x 148–230, y 153–187 — still clear of the wreath ring (x≥237),
+  the sprig (x≤142) and the "&" band (y≥189). It was x 150–228 with the Great
+  Vibes A, so the line grew 4px and stayed centred.
+- The swap changes pixels only within x 148–230, y 147–187. "Bharti" is untouched,
+  ink box identical at x 156–247, y 205–236.
+- Type-on still lands on frames 390/392/394/396/398.
+- Audio is bit-identical to the previous render (r = 1.0000 at zero lag).
 
 ## Changing the names again
 

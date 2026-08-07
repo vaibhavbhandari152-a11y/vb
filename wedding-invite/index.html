@@ -30,6 +30,20 @@
         src: url("assets/GreatVibes-latin.woff2") format("woff2");
       }
 
+      /* Great Vibes draws its capital A as a closed loop with no apex, so at
+         37px it reads as a lowercase a. Allura's A has a pointed apex and
+         near-identical stroke weight and slant, so swapping just that one
+         glyph makes the capital legible while "yush" and "Bharti" stay in the
+         card's own face and keep matching the baked-in date and venue.
+         Subset to U+0041 alone — 832 bytes. */
+      @font-face {
+        font-family: "Allura";
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+        src: url("assets/Allura-A.woff2") format("woff2");
+      }
+
       #root {
         position: relative;
         width: 360px;
@@ -84,6 +98,10 @@
       .script .ltr {
         opacity: 0;
       }
+      /* Only the initial. Everything else stays Great Vibes. */
+      .cap-a {
+        font-family: "Allura";
+      }
     </style>
   </head>
   <body>
@@ -134,7 +152,7 @@
                right, which is how the source staggers the pair around its
                off-centre "&". Keeping both preserves that composition. -->
           <text id="name-1" class="script" x="187.9" y="176" text-anchor="middle"><tspan
-              class="ltr"
+              class="ltr cap-a"
             >A</tspan><tspan class="ltr">y</tspan><tspan class="ltr">u</tspan><tspan
               class="ltr"
             >s</tspan><tspan class="ltr">h</tspan></text>
