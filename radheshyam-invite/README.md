@@ -1,11 +1,11 @@
 # Ek Shaam Radheshyam — date change
 
 The poster moved from **29.8.2026 (Saturday), 3:00 p.m** at Navita ji ke ghar to
-**26.10.2026 (Monday), 2:00 p.m** at Madhu Bhandari ke ghar, Old Grain Market,
+**24.10.2026 (Saturday), 2:00 p.m** at Madhu Bhandari ke ghar, Old Grain Market,
 Dera Road, Batala, near State Bank of India,
 composed and rendered with HyperFrames.
 
-Output: `renders/ek-shaam-radheshyam-26-10-2026.png` (lossless) and `.jpg` (q95, for WhatsApp).
+Output: `renders/ek-shaam-radheshyam-24-10-2026.png` (lossless) and `.jpg` (q95, for WhatsApp).
 
 ## How it works
 
