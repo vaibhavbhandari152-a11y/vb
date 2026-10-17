@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=900, height=1600" />
-    <title>Ek Shaam Radheshyam — 26.10.2026, 2 p.m</title>
+    <title>Ek Shaam Radheshyam — 26.10.2026, 2 p.m, Batala</title>
     <script src="vendor/gsap.min.js"></script>
     <style>
       * {
@@ -30,6 +30,18 @@
         font-weight: 700;
         font-display: block;
         src: url("assets/Mukta-700-latin.woff2") format("woff2");
+      }
+
+      /* The address panel is set in a narrower face than the date panel.
+         Open Sans Condensed Bold (Open Sans at wdth 75) fits it best of 21
+         condensed candidates: at matched height it lands within 1-6% of each
+         source line's width. Same Basic Latin subset. */
+      @font-face {
+        font-family: "Open Sans Condensed";
+        font-style: normal;
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/OpenSansCondensed-700-latin.woff2") format("woff2");
       }
 
       #root {
@@ -76,6 +88,13 @@
       #hour {
         font-size: 50px;
       }
+      /* 28.5px rather than the source's ~33px so the longest line, "Madhu
+         Bhandari ke ghar", spans the same 273px the source's widest line
+         ("Adarsh Enclave colony") did, frame to frame. */
+      #address {
+        font-family: "Open Sans Condensed";
+        font-size: 28.5px;
+      }
     </style>
   </head>
   <body>
@@ -106,6 +125,15 @@
           <!-- Only the hour digit is redrawn; ":00 p.m" is the source's own
                ink. Centred on the old "3" (ink x 658-679), on its baseline. -->
           <text id="hour" class="panel-text" x="668.5" y="912" text-anchor="middle">2</text>
+          <!-- Four lines in place of the source's five, at its own 42px line
+               pitch, centred on its block (ink y 1014-1208) and its line
+               centres (x≈750). -->
+          <text id="address" class="panel-text" text-anchor="middle">
+            <tspan x="750" y="1059">Madhu Bhandari ke ghar</tspan>
+            <tspan x="750" y="1101">Old Grain Market,</tspan>
+            <tspan x="750" y="1143">Dera Road, Batala</tspan>
+            <tspan x="750" y="1185">near State Bank of India</tspan>
+          </text>
         </svg>
       </div>
     </div>

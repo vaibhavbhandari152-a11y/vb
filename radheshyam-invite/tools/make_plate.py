@@ -1,6 +1,7 @@
-"""Build assets/plate.png: the poster with the old date, day and hour lifted out.
+"""Build assets/plate.png: the poster with the old date, day, hour and address
+lifted out.
 
-The date panel's parchment is near-flat (std ~1.2 levels in clean bands), so
+Both panels' parchment is near-flat within a band (std ~1.2 levels), so
 each patch is filled by interpolating, per column, between the clean rows just
 above and just below it, plus fixed-seed grain at the measured std. Run from
 the project root:  python3 tools/make_plate.py
@@ -17,6 +18,14 @@ PATCHES = {
     # Only the "3" of "3:00 p.m" - the ":00 p.m" stays the source's own ink.
     # Right edge stops short of the colon (ink from x=684).
     "hour": (654, 875, 682, 916),  # "3" ink 658-679 x 879-912
+    # Address panel: one band per old line, each bounded by the clean gaps
+    # between lines (the top ornament ends y=1011, the bottom one starts
+    # y=1218). Line 3 runs nearly frame to frame, so its band does too.
+    "addr1": (640, 1011, 866, 1050),  # "Navita ji ke ghar"     646-858 x 1014-1046
+    "addr2": (627, 1054, 874, 1090),  # "near A.V.M school"     633-868 x 1057-1082
+    "addr3": (606, 1094, 890, 1136),  # "Adarsh Enclave colony" 612-884 x 1100-1131
+    "addr4": (639, 1140, 863, 1173),  # "Bhandari Mohala"       645-857 x 1142-1166
+    "addr5": (704, 1177, 797, 1213),  # "Batala"                710-791 x 1184-1208
 }
 EDGE_ROWS = 3   # clean rows sampled on each side
 GRAIN_STD = 1.2
