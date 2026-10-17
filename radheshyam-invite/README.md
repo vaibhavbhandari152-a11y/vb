@@ -1,11 +1,19 @@
-# Ek Shaam Radheshyam — date change
+# Ek Shaam Radheshyam — poster and video
 
 The poster moved from **29.8.2026 (Saturday), 3:00 p.m** at Navita ji ke ghar to
 **24.10.2026 (Saturday), 2:00 p.m** at Madhu Bhandari ke ghar, Old Grain Market,
 Dera Road, Batala, near State Bank of India,
 composed and rendered with HyperFrames.
 
-Output: `renders/ek-shaam-radheshyam-24-10-2026.png` (lossless) and `.jpg` (q95, for WhatsApp).
+Outputs:
+
+- `renders/ek-shaam-radheshyam-24-10-2026.png` (lossless) and `.jpg` (q95, for WhatsApp): the still.
+- `renders/ek-shaam-radheshyam-24-10-2026.mp4`: a 12s, 900×1600, 30fps video version with sound.
+
+Files:
+
+- `index.html`: the video (the project's root composition).
+- `stills/poster.html`: the still.
 
 ## How it works
 
@@ -14,8 +22,9 @@ Output: `renders/ek-shaam-radheshyam-24-10-2026.png` (lossless) and `.jpg` (q95,
    into `assets/plate.png`. The panel's parchment is near-flat (std ~1.2 levels),
    so each patch is a per-column interpolation between the clean rows above and
    below, plus fixed-seed grain at that std.
-2. `index.html` lays the new lines over the plate as SVG text, so each baseline
-   is set exactly.
+2. `stills/poster.html` lays the new lines over the plate as SVG text, so each
+   baseline is set exactly. `index.html` uses the same plate, fonts and
+   placement for the video.
 
 | Property | Value | How it was established |
 | --- | --- | --- |
@@ -29,10 +38,52 @@ Output: `renders/ek-shaam-radheshyam-24-10-2026.png` (lossless) and `.jpg` (q95,
 Only the hour digit is redrawn: ":00 p.m" is the source's own ink, so the time line
 keeps its original lettering. Outside the edited text areas the render is pixel-identical to the source (0 pixels differ).
 
+## The video
+
+| Time | Shot | On screen | Sound |
+| --- | --- | --- | --- |
+| 0–2.5s | Title, slow push across to Krishna | Fade up from black | Shankh (conch) over a temple bell, tanpura, then a bansuri phrase |
+| 2.5–5.6s | Date / Day / Time panel, 1.8× | Date (on a bell) and day rise in; gold glint across the panel | Harmonium bhajan melody, dholak in keherwa, manjira |
+| 5.6–8.5s | Address panel, 1.8× | Four address lines rise in, the first on a bell, then one per half-beat; glint | Groove continues |
+| 8.5–12s | Pull back to the full poster (on a bell) | Glint over both panels; ends on the finished poster | Melody resolves to Sa on the final bell and fades |
+
+- **Camera:** one transform on `#camera` moves the plate, the text and the
+  glints together. Every shot stays inside the poster, so its edges never show.
+- **Address shot:** framed with the panel low in the frame. Centring on the
+  panel would cut through the singer's name plate just below it.
+- **Time line:** ":00 p.m" is baked into the plate, so the time shows from the
+  first frame rather than being revealed.
+- **Sparkles:** placed by a seeded PRNG, so every render is identical.
+- **Beat sync:** reveal times sit on the soundtrack's 100 bpm grid (0.6s beats
+  from 2.5s). `BELLS` in `tools/make_audio.py` and the times in `index.html`
+  move together.
+
+### Soundtrack
+
+`assets/score.wav` comes from `tools/make_audio.py`. Every instrument is
+synthesised, so there is no recording to license:
+
+- **Shankh:** a blown conch on Pa.
+- **Ghanti:** temple bell strikes.
+- **Tanpura:** Pa-Sa-Sa-Sa plucks with a jawari buzz.
+- **Bansuri:** a flute phrase with meend over the Krishna shot.
+- **Harmonium:** two-reed lead with a bass coupler and a Sa-Pa drone. It plays
+  an original 16-beat bhajan phrase pair in Bilawal (all shuddh swaras): the
+  first phrase climbs to Pa, and the answer comes home to Sa.
+- **Dholak:** keherwa taal (Dha Ge Na Ti | Na Ka Dhi Na).
+- **Manjira:** open and closed strokes alternating on the beat.
+
+Sa is D. The whole mix runs through a small stone-hall reverb.
+
 ## Re-rendering
 
 ```bash
 python3 tools/make_plate.py      # only if poster.jpg changes
+python3 tools/make_audio.py      # only if the soundtrack changes
 npm run check
-npx --yes hyperframes@0.7.94 render --format png-sequence --fps 1 -q high -o renders/frames
+
+# video
+npx --yes hyperframes@0.7.94 render -q high -o renders/ek-shaam-radheshyam-24-10-2026.mp4
+# still (one frame, then save it as the .png/.jpg)
+npx --yes hyperframes@0.7.94 render -c stills/poster.html --format png-sequence --fps 1 -q high -o renders/frames
 ```
