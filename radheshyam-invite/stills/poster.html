@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=900, height=1600" />
+    <title>Ek Shaam Radheshyam — 24.10.2026, 2 p.m, Batala</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 900px;
+        height: 1600px;
+        overflow: hidden;
+        background: #000;
+      }
+
+      /* Mukta Bold is the closest match to the poster's own type: at 54.5px it
+         reproduces "29.8.2026" at 222px wide vs the source's 221, and at 47.5px
+         "Saturday" at 185px vs 185, with matching ink density. Subset to Basic
+         Latin and self-hosted so the render is deterministic and offline. */
+      @font-face {
+        font-family: "Mukta";
+        font-style: normal;
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/Mukta-700-latin.woff2") format("woff2");
+      }
+
+      /* The address panel is set in a narrower face than the date panel.
+         Open Sans Condensed Bold (Open Sans at wdth 75) fits it best of 21
+         condensed candidates: at matched height it lands within 1-6% of each
+         source line's width. Same Basic Latin subset. */
+      @font-face {
+        font-family: "Open Sans Condensed";
+        font-style: normal;
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/OpenSansCondensed-700-latin.woff2") format("woff2");
+      }
+
+      #root {
+        position: relative;
+        width: 900px;
+        height: 1600px;
+        overflow: hidden;
+      }
+
+      /* The poster with the old date and day already lifted out — see
+         tools/make_plate.py. Everything outside the two patches is the
+         original pixel for pixel. */
+      #plate {
+        position: absolute;
+        inset: 0;
+        width: 900px;
+        height: 1600px;
+      }
+
+      /* SVG so each baseline is placed exactly (y IS the baseline) and
+         text-anchor centres on the advance width. */
+      #panel-svg {
+        position: absolute;
+        inset: 0;
+        width: 900px;
+        height: 1600px;
+      }
+      .panel-text {
+        font-family: "Mukta";
+        font-weight: 700;
+        fill: #320a03;
+        text-rendering: geometricPrecision;
+        /* Forces its own compositing layer, which drops Chromium's subpixel
+           antialiasing (colour fringes on the strokes), and softens the vector
+           edges to sit with the poster's own JPEG-soft type. */
+        filter: blur(0.35px);
+      }
+      #date {
+        font-size: 54.5px;
+      }
+      #day {
+        font-size: 47.5px;
+      }
+      #hour {
+        font-size: 50px;
+      }
+      /* 28.5px rather than the source's ~33px so the longest line, "Madhu
+         Bhandari ke ghar", spans the same 273px the source's widest line
+         ("Adarsh Enclave colony") did, frame to frame. */
+      #address {
+        font-family: "Open Sans Condensed";
+        font-size: 28.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="1"
+      data-width="900"
+      data-height="1600"
+    >
+      <img
+        id="plate"
+        class="clip"
+        src="assets/plate.png"
+        alt=""
+        data-start="0"
+        data-duration="1"
+        data-track-index="0"
+      />
+
+      <div id="panel" class="clip" data-start="0" data-duration="1" data-track-index="1">
+        <svg id="panel-svg" viewBox="0 0 900 1600" xmlns="http://www.w3.org/2000/svg">
+          <!-- Baselines and centres are the source lines' own: "29.8.2026"
+               sat on y=675 centred at x≈746, "Saturday" on y=792 at x≈747. -->
+          <text id="date" class="panel-text" x="746" y="675" text-anchor="middle">24.10.2026</text>
+          <text id="day" class="panel-text" x="747" y="792" text-anchor="middle">Saturday</text>
+          <!-- Only the hour digit is redrawn; ":00 p.m" is the source's own
+               ink. Centred on the old "3" (ink x 658-679), on its baseline. -->
+          <text id="hour" class="panel-text" x="668.5" y="912" text-anchor="middle">2</text>
+          <!-- Four lines in place of the source's five, at its own 42px line
+               pitch, centred on its block (ink y 1014-1208) and its line
+               centres (x≈750). -->
+          <text id="address" class="panel-text" text-anchor="middle">
+            <tspan x="750" y="1059">Madhu Bhandari ke ghar</tspan>
+            <tspan x="750" y="1101">Old Grain Market,</tspan>
+            <tspan x="750" y="1143">Dera Road, Batala</tspan>
+            <tspan x="750" y="1185">near State Bank of India</tspan>
+          </text>
+        </svg>
+      </div>
+    </div>
+
+    <script>
+      // A still: nothing animates, but the runtime still expects a registered
+      // paused timeline for the root composition.
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
