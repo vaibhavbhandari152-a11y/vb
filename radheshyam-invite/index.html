@@ -221,28 +221,30 @@
       tl.to("#camera", { ...SHOT.details, duration: 0.85, ease: "power2.inOut" }, 2.5);
       tl.to("#camera", { ...SHOT.detailsEnd, duration: 2.25, ease: "none" }, 3.35);
       tl.to("#camera", { ...SHOT.venue, duration: 0.85, ease: "power2.inOut" }, 5.6);
-      tl.to("#camera", { ...SHOT.venueEnd, duration: 2.45, ease: "none" }, 6.45);
-      tl.to("#camera", { ...SHOT.full, duration: 1.3, ease: "power2.inOut" }, 8.9);
+      tl.to("#camera", { ...SHOT.venueEnd, duration: 2.05, ease: "none" }, 6.45);
+      tl.to("#camera", { ...SHOT.full, duration: 1.3, ease: "power2.inOut" }, 8.5);
 
       // ---- Fade in from black --------------------------------------------
       tl.to("#fade", { opacity: 0, duration: 1.0, ease: "power1.out" }, 0.1);
 
       // ---- Text reveals ---------------------------------------------------
-      // Each line rises a few px into place as it fades up, landing on the
-      // beat a bell strikes (see tools/make_audio.py).
+      // Each line rises a few px into place as it fades up. Times sit on the
+      // soundtrack's 100 bpm grid (0.6s beats from 2.5s): the date, the first
+      // address line and the pull-back each land on a bell strike
+      // (BELLS in tools/make_audio.py), the other address lines on half-beats.
       const reveal = (sel, at) =>
         tl.fromTo(sel, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, at);
-      reveal("#date", 3.4);
-      reveal("#day", 3.85);
-      ["#addr-1", "#addr-2", "#addr-3", "#addr-4"].forEach((sel, i) => reveal(sel, 6.45 + i * 0.3));
+      reveal("#date", 3.7);
+      reveal("#day", 4.3);
+      ["#addr-1", "#addr-2", "#addr-3", "#addr-4"].forEach((sel, i) => reveal(sel, 6.7 + i * 0.3));
 
       // ---- Glints ---------------------------------------------------------
       const glint = (sel, at) =>
         tl.fromTo(`${sel} .glint`, { x: 0 }, { x: 520, duration: 0.9, ease: "power1.inOut", immediateRender: false }, at);
-      glint("#glint-date", 4.55);
-      glint("#glint-addr", 7.95);
-      glint("#glint-date", 10.45);
-      glint("#glint-addr", 10.75);
+      glint("#glint-date", 4.9);
+      glint("#glint-addr", 7.9);
+      glint("#glint-date", 10.3);
+      glint("#glint-addr", 10.6);
 
       // ---- Sparkles -------------------------------------------------------
       // Seeded PRNG so every render places them identically.

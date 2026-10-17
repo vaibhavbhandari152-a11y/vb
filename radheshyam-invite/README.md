@@ -40,12 +40,12 @@ keeps its original lettering. Outside the edited text areas the render is pixel-
 
 ## The video
 
-| Time | Shot | On screen |
-| --- | --- | --- |
-| 0–2.5s | Title, slow push across to Krishna | Fade up from black; bell |
-| 2.5–5.6s | Date / Day / Time panel, 1.8× | Date and day rise in; gold glint across the panel; bell |
-| 5.6–8.9s | Address panel, 1.8× | The four address lines rise in, one every 0.3s; glint; bell |
-| 8.9–12s | Pull back to the full poster | Glint over both panels; final bell; ends on the finished poster |
+| Time | Shot | On screen | Sound |
+| --- | --- | --- | --- |
+| 0–2.5s | Title, slow push across to Krishna | Fade up from black | Shankh (conch) over a temple bell, tanpura, then a bansuri phrase |
+| 2.5–5.6s | Date / Day / Time panel, 1.8× | Date (on a bell) and day rise in; gold glint across the panel | Harmonium bhajan melody, dholak in keherwa, manjira |
+| 5.6–8.5s | Address panel, 1.8× | Four address lines rise in, the first on a bell, then one per half-beat; glint | Groove continues |
+| 8.5–12s | Pull back to the full poster (on a bell) | Glint over both panels; ends on the finished poster | Melody resolves to Sa on the final bell and fades |
 
 - **Camera:** one transform on `#camera` moves the plate, the text and the
   glints together. Every shot stays inside the poster, so its edges never show.
@@ -54,9 +54,26 @@ keeps its original lettering. Outside the edited text areas the render is pixel-
 - **Time line:** ":00 p.m" is baked into the plate, so the time shows from the
   first frame rather than being revealed.
 - **Sparkles:** placed by a seeded PRNG, so every render is identical.
-- **Soundtrack:** `assets/score.wav` comes from `tools/make_audio.py`. It is a
-  soft Sa-Pa drone with temple-bell strikes on the reveal beats. It is fully
-  synthesised, so there is no licensing to clear.
+- **Beat sync:** reveal times sit on the soundtrack's 100 bpm grid (0.6s beats
+  from 2.5s). `BELLS` in `tools/make_audio.py` and the times in `index.html`
+  move together.
+
+### Soundtrack
+
+`assets/score.wav` comes from `tools/make_audio.py`. Every instrument is
+synthesised, so there is no recording to license:
+
+- **Shankh:** a blown conch on Pa.
+- **Ghanti:** temple bell strikes.
+- **Tanpura:** Pa-Sa-Sa-Sa plucks with a jawari buzz.
+- **Bansuri:** a flute phrase with meend over the Krishna shot.
+- **Harmonium:** two-reed lead with a bass coupler and a Sa-Pa drone. It plays
+  an original 16-beat bhajan phrase pair in Bilawal (all shuddh swaras): the
+  first phrase climbs to Pa, and the answer comes home to Sa.
+- **Dholak:** keherwa taal (Dha Ge Na Ti | Na Ka Dhi Na).
+- **Manjira:** open and closed strokes alternating on the beat.
+
+Sa is D. The whole mix runs through a small stone-hall reverb.
 
 ## Re-rendering
 
