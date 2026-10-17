@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=900, height=1600" />
-    <title>Ek Shaam Radheshyam — 26.10.2026</title>
+    <title>Ek Shaam Radheshyam — 26.10.2026, 2 p.m</title>
     <script src="vendor/gsap.min.js"></script>
     <style>
       * {
@@ -73,6 +73,9 @@
       #day {
         font-size: 47.5px;
       }
+      #hour {
+        font-size: 50px;
+      }
     </style>
   </head>
   <body>
@@ -100,6 +103,9 @@
                sat on y=675 centred at x≈746, "Saturday" on y=792 at x≈747. -->
           <text id="date" class="panel-text" x="746" y="675" text-anchor="middle">26.10.2026</text>
           <text id="day" class="panel-text" x="747" y="792" text-anchor="middle">Monday</text>
+          <!-- Only the hour digit is redrawn; ":00 p.m" is the source's own
+               ink. Centred on the old "3" (ink x 658-679), on its baseline. -->
+          <text id="hour" class="panel-text" x="668.5" y="912" text-anchor="middle">2</text>
         </svg>
       </div>
     </div>

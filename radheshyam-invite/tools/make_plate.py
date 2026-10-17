@@ -1,4 +1,4 @@
-"""Build assets/plate.png: the poster with the old date and day lifted out.
+"""Build assets/plate.png: the poster with the old date, day and hour lifted out.
 
 The date panel's parchment is near-flat (std ~1.2 levels in clean bands), so
 each patch is filled by interpolating, per column, between the clean rows just
@@ -14,6 +14,9 @@ from PIL import Image, ImageFilter
 PATCHES = {
     "date": (628, 631, 864, 686),  # "29.8.2026" ink 636-856 x 639-675
     "day": (647, 750, 847, 812),   # "Saturday"  ink 655-839 x 758-804
+    # Only the "3" of "3:00 p.m" - the ":00 p.m" stays the source's own ink.
+    # Right edge stops short of the colon (ink from x=684).
+    "hour": (654, 875, 682, 916),  # "3" ink 658-679 x 879-912
 }
 EDGE_ROWS = 3   # clean rows sampled on each side
 GRAIN_STD = 1.2
